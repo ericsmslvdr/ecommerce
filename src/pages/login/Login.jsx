@@ -18,9 +18,15 @@ const Login = () => {
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        handleLogin(formData.email, formData.password)
+        const res = await handleLogin(formData.email, formData.password)
+        if (res && res.status === "success") {
+            setFormData({
+                email: '',
+                password: ''
+            })
+        }
         console.log("LOGINNN PAGE!");
     }
 
