@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Cart, Home, Login, Signup } from './pages'
-import { AuthContextProvider } from './context/AuthContext,jsx'
+import { AuthContextProvider } from './context/AuthContext'
 
 const App = () => {
   return (
