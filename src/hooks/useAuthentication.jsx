@@ -14,15 +14,27 @@ const useAuthentication = () => {
         try {
             await signInWithEmailAndPassword(auth, email, password)
             setSuccessMsg("Login Successfull. You will now automatically get redirected to Home Page!")
-            setEmail("")
-            setPassword("")
             setErrorMsg("")
             setTimeout(() => {
                 setSuccessMsg("")
                 navigate("/")
             }, 3000)
+            return { status: "success" }
         } catch (error) {
-            setErrorMsg(error.message)
+            console.log(error);
+            switch (error.code) {
+                case "auth/too-many-requests":
+                    setErrorMsg("Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.")
+                    break
+                case "auth/wrong-password":
+                    setErrorMsg("Wrong password. Try again.")
+                    break
+                case "auth/user-not-found":
+                    setErrorMsg("Account not found. Please create account first!")
+                    break
+                default:
+                    break
+            }
             setTimeout(() => {
                 setErrorMsg("")
             }, 3000)
