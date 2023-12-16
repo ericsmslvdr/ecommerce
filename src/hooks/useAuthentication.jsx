@@ -6,9 +6,6 @@ import { useState } from "react"
 const useAuthentication = () => {
     const navigate = useNavigate()
 
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-
     const [errorMsg, setErrorMsg] = useState("")
     const [successMsg, setSuccessMsg] = useState("")
 
