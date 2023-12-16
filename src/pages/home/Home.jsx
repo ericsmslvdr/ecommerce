@@ -1,38 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { Navbar } from '../../components'
-import { Products } from './Products'
+import { Navbar, Products } from '../../components'
 import { useNavigate } from 'react-router-dom'
-import { getCurrentUser, addToCart, getProducts, getCartProductsCount } from './utils'
-import { db } from '../config/firebase'
-import { collection, onSnapshot } from 'firebase/firestore'
 import { ToastContainer } from 'react-toastify'
-import { useCurrentUser } from '../../hooks'
+import { useCurrentUser, useFetchProducts } from '../../hooks'
 
 const Home = () => {
     const { uid, user } = useCurrentUser()
+    const { products, cartProductsCount } = useFetchProducts()
 
 
     const navigate = useNavigate('')
-    const [products, setProducts] = useState([])
-    const [cartProductsCount, setCartProductsCount] = useState(0)
-    const [totalCartProductsCount, setTotalCartProductsCount] = useState(0)
-    const productsCollectionRef = collection(db, "products")
-    const cartProductsCollectionRef = collection(db, "Cart " + uid)
-
-    useEffect(() => {
-        getCurrentUser(setUid, setUser)
-        const unsubcribe = onSnapshot((productsCollectionRef, cartProductsCollectionRef), () => {
-            getProducts(setProducts, productsCollectionRef)
-            getCartProductsCount(cartProductsCollectionRef, setCartProductsCount, setTotalCartProductsCount)
-        })
-
-        console.log("HOOOMEEE 1st useEf");
-        return () => {
-            unsubcribe()
-        }
-    }, [uid])
-
-    console.log(totalCartProductsCount)
 
     return (
         <>
@@ -47,7 +23,6 @@ const Home = () => {
                                 products={products}
                                 isCartProduct={false}
                                 uid={uid}
-                                addToCart={addToCart}
                                 navigate={navigate}
                             />
                             <ToastContainer />

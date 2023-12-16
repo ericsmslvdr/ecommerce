@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import logo from "./images/logo.png"
 import { Icon } from 'react-icons-kit'
 import { shoppingCart } from 'react-icons-kit/feather/shoppingCart'
 import { auth } from '../config/firebase';
 import { signOut } from 'firebase/auth';
+import { logo } from '../assets';
 
 const Navbar = ({ user, cartProductsCount }) => {
     const navigate = useNavigate()
