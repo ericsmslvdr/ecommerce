@@ -9,7 +9,7 @@ const Home = () => {
 
 
     const navigate = useNavigate('')
-
+    console.log(products);
     return (
         <>
             <Navbar user={user} uid={uid} cartProductsCount={cartProductsCount} />

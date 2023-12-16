@@ -2,6 +2,7 @@ import { doc } from 'firebase/firestore';
 import React, { useState } from 'react'
 import { db } from '../config/firebase';
 import { useCartOperation } from '../hooks';
+import { formatPrice } from '../utils';
 
 const IndividualProduct = ({ individualProduct, isCartProduct, uid }) => {
     const { addToCart, deleteProduct, increaseQty, decreaseQty } = useCartOperation()
