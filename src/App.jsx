@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Cart, Home, Login, Signup } from './pages'
+import { Cart, Home, Login, NotFound, Signup } from './pages'
 import { AuthContextProvider } from './context/AuthContext'
 
 const App = () => {
@@ -12,6 +12,7 @@ const App = () => {
           <Route path='/signup' element={<Signup />} />
           <Route path='/home' element={<Home />} />
           <Route path='/cart' element={<Cart />} />
+          <Route path='/*' element={<NotFound />} />
         </Routes>
       </AuthContextProvider>
     </BrowserRouter>
