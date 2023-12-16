@@ -4,6 +4,7 @@ import { useState } from "react"
 
 const Login = () => {
     const { errorMsg, successMsg, handleLogin } = useAuthentication()
+
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -23,7 +24,7 @@ const Login = () => {
         console.log("LOGINNN PAGE!");
     }
 
-    console.log(formData.email);
+    console.log(`Email: ${formData.email}`);
     return (
         <div className="container w-50">
             {errorMsg && <div className="alert alert-danger mt-4">{errorMsg}</div>}
@@ -39,8 +40,8 @@ const Login = () => {
                 <label>Email</label>
                 <input
                     type="email"
-                    name='email'
-                    className="form-control  form-control"
+                    name="email"
+                    className="form-control"
                     required
                     onChange={handleOnChange}
                     value={formData.email}
@@ -49,8 +50,8 @@ const Login = () => {
                 <label>Password</label>
                 <input
                     type="password"
-                    name='password'
-                    className="form-control form-control"
+                    name="password"
+                    className="form-control"
                     required
                     onChange={handleOnChange}
                     value={formData.password}
