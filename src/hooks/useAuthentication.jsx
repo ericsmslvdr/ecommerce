@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
 import { useNavigate } from "react-router-dom"
-import { auth } from "../config/firebase"
+import { auth, db } from "../config/firebase"
 import { useState } from "react"
 import { doc, setDoc } from "firebase/firestore"
 
@@ -50,16 +50,25 @@ const useAuthentication = () => {
                 full_name: fullName,
                 password: password,
             })
-            setSuccessMsg("Signup Successfull. You will now redirect to login page!")
-            setFullName("")
-            setEmail("")
-            setPassword("")
+            console.log("asdasdasd");
+            setSuccessMsg("Signup Successful. You will now redirect to login page!")
             setTimeout(() => {
                 setSuccessMsg("")
                 navigate("/login")
             }, 3000)
+            return { status: "success" }
         } catch (error) {
-            setErrorMsg(error.message)
+            console.log(error.code);
+            switch (error.code) {
+                case "auth/weak-password":
+                    setErrorMsg("Password should be at least 6 characters.")
+                    break;
+                case "auth/email-already-in-use":
+                    setErrorMsg("This email is already in use. Please use another email.")
+                    break;
+                default:
+                    break;
+            }
             setTimeout(() => {
                 setErrorMsg("")
             }, 3000)

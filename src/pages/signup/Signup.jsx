@@ -19,9 +19,16 @@ const Signup = () => {
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        handleSignup(formData.email, formData.password, formData.fullName)
+        const res = await handleSignup(formData.email, formData.password, formData.fullName)
+        if (res && res.status === "succes") {
+            setFormData({
+                fullName: '',
+                email: '',
+                password: ''
+            })
+        }
     }
 
     return (
