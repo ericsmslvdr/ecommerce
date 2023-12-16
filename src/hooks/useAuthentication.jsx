@@ -1,7 +1,8 @@
-import { signInWithEmailAndPassword } from "firebase/auth"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
 import { useNavigate } from "react-router-dom"
 import { auth } from "../config/firebase"
 import { useState } from "react"
+import { doc, setDoc } from "firebase/firestore"
 
 const useAuthentication = () => {
     const navigate = useNavigate()
@@ -28,8 +29,32 @@ const useAuthentication = () => {
         }
     }
 
+    const handleSignup = async (email, password, fullName) => {
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+            const ref = doc(db, 'users', userCredential.user.uid)
+            await setDoc(ref, {
+                email: email,
+                full_name: fullName,
+                password: password,
+            })
+            setSuccessMsg("Signup Successfull. You will now redirect to login page!")
+            setFullName("")
+            setEmail("")
+            setPassword("")
+            setTimeout(() => {
+                setSuccessMsg("")
+                navigate("/login")
+            }, 3000)
+        } catch (error) {
+            setErrorMsg(error.message)
+            setTimeout(() => {
+                setErrorMsg("")
+            }, 3000)
+        }
+    }
 
-    return { errorMsg, successMsg, handleLogin }
+    return { errorMsg, successMsg, handleLogin, handleSignup }
 }
 
 export default useAuthentication
