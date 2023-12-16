@@ -19,10 +19,11 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        handleLogin(email, password)
+        handleLogin(formData.email, formData.password)
         console.log("LOGINNN PAGE!");
     }
 
+    console.log(formData.email);
     return (
         <div className="container w-50">
             {errorMsg && <div className="alert alert-danger mt-4">{errorMsg}</div>}
