@@ -38,7 +38,6 @@ const useFetchProducts = () => {
             setTotalCartProductsCount(quantity);
             setGrandTotalPrice(totalPrice);
             console.log("getcartProducts triggered!")
-
         })
 
         return () => {

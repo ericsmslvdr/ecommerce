@@ -10,15 +10,7 @@ const Cart = () => {
     const { cartProductsCount, cartProducts, totalCartProductsCount, grandTotalPrice } = useFetchProducts()
     const { formatPrice } = usePriceFormatter()
 
-    const [isOpen, setIsOpen] = useState(false)
-
     console.log("CART PRODUCTS: ", cartProducts);
-
-    const openModal = () => {
-        console.log("testing");
-        setIsOpen(!isOpen)
-        console.warn("IS OPEN STATUS: " + isOpen);
-    }
 
     // const handleToken = async (token) => {
     //     //  console.log(token);
@@ -62,7 +54,6 @@ const Cart = () => {
             <Navbar user={user} uid={uid} cartProductsCount={cartProductsCount} />
             <br></br>
             <div className='container-fluid'>
-                {isOpen && <Modal openModal={openModal} />}
                 {
                     cartProducts.length > 0
                         ? (
