@@ -12,42 +12,42 @@ const Cart = () => {
 
     console.log("CART PRODUCTS: ", cartProducts);
 
-    // const handleToken = async (token) => {
-    //     //  console.log(token);
-    //     const cart = { name: 'All Productssss', grandTotalPrice }
-    //     const response = await axios.post('http://localhost:8080/checkout', {
-    //         token,
-    //         cart
-    //     })
-    //     console.log(response);
+    const handleToken = async (token) => {
+        //  console.log(token);
+        const cart = { name: 'All Productssss', grandTotalPrice }
+        const response = await axios.post('http://localhost:8080/checkout', {
+            token,
+            cart
+        })
+        console.log(response);
 
-    //     let { status } = response.data;
+        let { status } = response.data;
 
-    //     console.log("Res Status: " + status);
+        console.log("Res Status: " + status);
 
-    //     if (status === 'success') {
-    //         navigate('/');
-    //         toast.success('Your order has been placed successfully', {
-    //             position: "bottom-right",
-    //             autoClose: 5000,
-    //             hideProgressBar: false,
-    //             closeOnClick: true,
-    //             pauseOnHover: true,
-    //             draggable: true,
-    //             progress: undefined,
-    //             theme: "light",
-    //         });
+        if (status === 'success') {
+            navigate('/');
+            toast.success('Your order has been placed successfully', {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
 
-    //         const carts = await getDocs(cartProductsCollectionRef);
-    //         for (var cartProd of carts.docs) {
-    //             const cartProductRef = doc(cartProductsCollectionRef, cartProd.id)
-    //             await deleteDoc(cartProductRef)
-    //         }
-    //     }
-    //     else {
-    //         alert('something went wrong in checkout');
-    //     }
-    // }
+            const carts = await getDocs(cartProductsCollectionRef);
+            for (var cartProd of carts.docs) {
+                const cartProductRef = doc(cartProductsCollectionRef, cartProd.id)
+                await deleteDoc(cartProductRef)
+            }
+        }
+        else {
+            alert('something went wrong in checkout');
+        }
+    }
 
     return (
         <>
@@ -80,14 +80,14 @@ const Cart = () => {
                                         </div>
                                         <br />
                                         {/* <button className="cart-btn align-self-center mt-4 w-100 fw-bold" onClick={openModal}>Pay with Card</button> */}
-                                        {/* <StripeCheckout
+                                        <StripeCheckout
                                             stripeKey='pk_test_51O8CLRA8OdZJXf5QU01fAR8Wra5pQiqvRV33ONbNz5Y3FSAdP851C95TgC8RqbYFm1UQK9iiUUhqmHaIbM7SBrRG00osMsQjL2'
                                             token={handleToken}
                                             billingAddress
                                             shippingAddress
                                             name='All Products'
                                             amount={grandTotalPrice * 100}
-                                        ></StripeCheckout> */}
+                                        ></StripeCheckout>
                                     </div >
                                 </div>
                             </>
