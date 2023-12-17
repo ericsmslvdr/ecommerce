@@ -12,25 +12,13 @@ const Cart = () => {
 
     const [isOpen, setIsOpen] = useState(false)
 
+    console.log("CART PRODUCTS: ", cartProducts);
 
     const openModal = () => {
         console.log("testing");
         setIsOpen(!isOpen)
         console.warn("IS OPEN STATUS: " + isOpen);
     }
-
-    // useEffect(() => {
-    //     const unsubscribe = onSnapshot(cartProductsCollectionRef, () => {
-    //         getCartProducts(cartProductsCollectionRef, setCartProducts, setGrandTotalPrice)
-    //         getCartProductsCount()
-    //     })
-
-    //     getCurrentUser()
-    //     console.log("CARRRTTTTT 1st useff");
-    //     return () => {
-    //         unsubscribe()
-    //     }
-    // }, [uid])
 
     // const handleToken = async (token) => {
     //     //  console.log(token);
