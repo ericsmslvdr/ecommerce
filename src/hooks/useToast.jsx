@@ -1,3 +1,6 @@
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'
+
 const useToast = () => {
     const triggerToast = (message) => {
         toast.success(message, {

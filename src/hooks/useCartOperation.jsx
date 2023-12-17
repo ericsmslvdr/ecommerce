@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom"
 import { db } from "../config/firebase"
 import { collection, deleteDoc, doc, getDocs, serverTimestamp, setDoc, updateDoc } from "firebase/firestore"
+import useToast from "./useToast"
 
 const useCartOperation = () => {
+    const { triggerToast } = useToast()
     const navigate = useNavigate()
-    /* ADD TO CART */
+
     const addToCart = async (product, uid) => {
         try {
             const cartCollectionRef = collection(db, 'Cart ' + uid)
@@ -30,7 +32,7 @@ const useCartOperation = () => {
                         totalProductPrice: (currentQuantity + 1) * currentProductPrice,
                         timeStamp: serverTimestamp()
                     })
-                    // triggerToast(`${cartProduct.title} added to cart succesfully!`)
+                    triggerToast(`${cartProduct.title} added to cart succesfully!`)
                     return
                 }
             }
@@ -46,7 +48,7 @@ const useCartOperation = () => {
                 totalProductPrice: 1 * product.price,
                 timeStamp: serverTimestamp()
             })
-            // triggerToast(`${product.title} added to cart succesfully!`)
+            triggerToast(`${product.title} added to cart succesfully!`)
 
         } catch (error) {
             console.log(error);
