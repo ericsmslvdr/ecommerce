@@ -78,17 +78,22 @@ const useFetchProducts = () => {
         })
 
         const cartProductsUnsubscribe = onSnapshot(query(cartProductsCollectionRef, orderBy("timeStamp", "desc")), (cartSnapshot) => {
-            let quantity = 0
-            let grandTotalPrice = 0
-            const cartProductsData = cartSnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-            setCartProducts(cartProductsData)
-            setCartProductsCount(cartProductsData.length)
-            for (const cartProduct of cartProducts) {
-                quantity += cartProduct.quantity
-                grandTotalPrice = cartProduct.totalProductPrice
-            }
-            setTotalCartProductsCount(quantity)
-            setGrandTotalPrice(grandTotalPrice)
+            let quantity = 0;
+            let totalPrice = 0;
+
+            const cartProductsData = cartSnapshot.docs.map((doc) => {
+                const cartProduct = { ...doc.data(), id: doc.id };
+                quantity += cartProduct.quantity;
+                totalPrice += cartProduct.totalProductPrice;
+                return cartProduct;
+            });
+
+            setCartProducts(cartProductsData);
+            setCartProductsCount(cartProductsData.length);
+            setTotalCartProductsCount(quantity);
+            setGrandTotalPrice(totalPrice);
+            console.log("getcartProducts triggered!")
+
         })
 
 
@@ -96,7 +101,7 @@ const useFetchProducts = () => {
             productsUnsubscribe()
             cartProductsUnsubscribe()
         }
-    }, [uid])
+    }, [])
 
     // useEffect(() => {
     //     const unsubscribe = onSnapshot(cartProductsCollectionRef, () => {
