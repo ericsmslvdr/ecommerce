@@ -1,17 +1,14 @@
 import React, { useState } from "react"
 import { ToastContainer, toast } from "react-toastify"
 import StripeCheckout from "react-stripe-checkout"
-import { useNavigate } from "react-router-dom"
 import axios from "axios"
-import { useCurrentUser, useFetchProducts } from "../hooks"
+import { useCurrentUser, useFetchProducts, usePriceFormatter } from "../hooks"
 import { Navbar, Products } from "../components"
-import { formatPrice } from "../utils"
 
 const Cart = () => {
     const { uid, user } = useCurrentUser()
     const { cartProductsCount, cartProducts, totalCartProductsCount, grandTotalPrice } = useFetchProducts()
-
-    const navigate = useNavigate()
+    const { formatPrice } = usePriceFormatter()
 
     const [isOpen, setIsOpen] = useState(false)
 

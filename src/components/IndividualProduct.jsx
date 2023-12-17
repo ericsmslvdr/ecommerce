@@ -1,11 +1,11 @@
 import { doc } from 'firebase/firestore';
 import React, { useState } from 'react'
 import { db } from '../config/firebase';
-import { useCartOperation } from '../hooks';
-import { formatPrice } from '../utils';
+import { useCartOperation, usePriceFormatter } from '../hooks';
 
 const IndividualProduct = ({ individualProduct, isCartProduct, uid }) => {
     const { addToCart, deleteProduct, increaseQty, decreaseQty } = useCartOperation()
+    const { formatPrice } = usePriceFormatter()
 
     const [quantity, setQuantity] = useState(individualProduct.quantity)
     const cartProductRef = doc(db, 'Cart ' + uid, individualProduct.id)
