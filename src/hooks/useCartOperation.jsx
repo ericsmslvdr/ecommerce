@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { db } from "../config/firebase"
-import { collection, doc, getDocs, serverTimestamp, setDoc, updateDoc } from "firebase/firestore"
+import { collection, deleteDoc, doc, getDocs, serverTimestamp, setDoc, updateDoc } from "firebase/firestore"
 
 const useCartOperation = () => {
     const navigate = useNavigate()
