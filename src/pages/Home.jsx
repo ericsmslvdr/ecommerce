@@ -1,14 +1,12 @@
-import { Navbar, Products } from '../../components'
+import { Navbar, Products } from '../components'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
-import { useCurrentUser, useFetchProducts } from '../../hooks'
+import { useCurrentUser, useFetchProducts } from '../hooks'
 
 const Home = () => {
     const { uid, user } = useCurrentUser()
     const { products, cartProductsCount } = useFetchProducts()
 
-
-    const navigate = useNavigate('')
     console.log(products);
     return (
         <>
@@ -23,7 +21,6 @@ const Home = () => {
                                 products={products}
                                 isCartProduct={false}
                                 uid={uid}
-                                navigate={navigate}
                             />
                             <ToastContainer />
                         </div>

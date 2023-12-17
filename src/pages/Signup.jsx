@@ -1,11 +1,12 @@
-import { Link } from "react-router-dom"
-import { useAuthentication } from "../../hooks"
 import { useState } from "react"
+import { Link } from "react-router-dom"
+import { useAuthentication } from "../hooks"
 
-const Login = () => {
-    const { errorMsg, successMsg, handleLogin } = useAuthentication()
+const Signup = () => {
+    const { errorMsg, successMsg, handleSignup } = useAuthentication()
 
     const [formData, setFormData] = useState({
+        fullName: '',
         email: '',
         password: ''
     })
@@ -20,29 +21,38 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const res = await handleLogin(formData.email, formData.password)
-        if (res && res.status === "success") {
+        const res = await handleSignup(formData.email, formData.password, formData.fullName)
+        if (res && res.status === "succes") {
             setFormData({
+                fullName: '',
                 email: '',
                 password: ''
             })
         }
-        console.log("LOGINNN PAGE!");
     }
 
-    console.log(`Email: ${formData.email}`);
     return (
         <div className="container w-50">
             {errorMsg && <div className="alert alert-danger mt-4">{errorMsg}</div>}
             {successMsg && <div className="alert alert-success mt-4">{successMsg}</div>}
             <br />
-            <h1>Login</h1>
+            <h1>Sign Up</h1>
             <hr />
             <form
                 className="form-group"
                 autoComplete="off"
                 onSubmit={handleSubmit}
             >
+                <label>Full Name</label>
+                <input
+                    type="text"
+                    name="fullName"
+                    className="form-control"
+                    required
+                    onChange={handleOnChange}
+                    value={formData.fullName}
+                />
+                <br />
                 <label>Email</label>
                 <input
                     type="email"
@@ -64,20 +74,12 @@ const Login = () => {
                 />
                 <br />
                 <div className="btn-box">
-                    <span>
-                        Don't have an account? &nbsp;
-                        <Link
-                            to={"/signup"}
-                            className="link"
-                        >
-                            Sign Up
-                        </Link>
-                    </span>
+                    <span>Already have an account? <Link to={"/login"} className="link">Login</Link></span>
                     <button
                         type="submit"
-                        className="button login-btn"
+                        className="button signup-btn"
                     >
-                        LOGIN
+                        Sign Up
                     </button>
                 </div>
             </form>
@@ -85,4 +87,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default Signup

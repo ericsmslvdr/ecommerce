@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Cart, Home, Login, NotFound, Signup } from './pages'
 import { AuthContextProvider } from './context/AuthContext'
+import ProtectedRoute from './config/protectedRoute'
 
 const App = () => {
   return (
@@ -10,8 +11,8 @@ const App = () => {
           <Route exact path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
-          <Route path='/home' element={<Home />} />
-          <Route path='/cart' element={<Cart />} />
+          <Route path='/home' element={<ProtectedRoute>{<Home />}</ProtectedRoute>} />
+          <Route path='/cart' element={<ProtectedRoute>{<Cart />}</ProtectedRoute>} />
           <Route path='/*' element={<NotFound />} />
         </Routes>
       </AuthContextProvider>
